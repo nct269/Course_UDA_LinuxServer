@@ -1,0 +1,37 @@
+Ntion on of free software:
+free as in beer 
+
+Vagrant used to create virtual environment
+
+Virutal box to launch virtual machines on the physical machine
+
+Linux distribution use:
+Red hat: Large entreprise/ Corporate customers
+UNbuntu: Ease of use on servers, desktops, laptops
+Linux Mint: Desktop users with proproetary media support
+Core OS: Clustered, containerized dev of apps
+
+Vagrant command:
+vagrant up: to start or restart the VM
+vagrant status: to check the VM status
+vagrant halt: to shut the VM down forcefully 
+vagrant suspend: to suspend the virtual machine
+
+Rem: the VM is an entirely different computer from your physical machine, you can do whatever you want on it with no impact on the PM.
+
+ls -al (a show all stuff in the dirctry included the hidden ones, l to get more info, element starting with d are directory, with - are files)
+
+In Linux all standard user's home directories will be within the /home/ directory. The root user is a special case, it's home directory is in /root/.
+
+The /sbin directory holds all of the applications you may need as an administrator, but normal users typically won't use.
+
+Update your path
+http://askubuntu.com/questions/60218/how-to-add-a-directory-to-my-path
+
+Display your path
+echo $PATH
+
+To chose a distribution, think to what will be your use.
+Red hat for enterprise
+Unbuntu for support and community
+Debian is unbuntu mother's distribution, it is known as very stable
