@@ -12,7 +12,18 @@ UNbuntu: Ease of use on servers, desktops, laptops
 Linux Mint: Desktop users with proproetary media support
 Core OS: Clustered, containerized dev of apps
 
+In linux: / is the highest root of every directory
+
+/etc/ is where configuration files live
+
+/var/ for variable, files that you expect to grow or change in size (system log & app log are tipically here)
+
+/bin/ where the applications stand, to be used by everybody
+
+/sbin/ similar to bin but only to be used by the root user for maintenance purposes 
+
 Vagrant command:
+vagrant init ubuntu/trusty64
 vagrant up: to start or restart the VM
 vagrant status: to check the VM status
 vagrant halt: to shut the VM down forcefully 
@@ -47,23 +58,31 @@ It removes a user name they know exist on this box
 
 The command sudo (super user do) can be used to launch command as a super user from a regular user
 
-Package source list can be found at /etc/apt/sources.list
+-> Package source list can be found at /etc/apt/sources.list
 
-apt-get is the interface function to a lot of package related functions (man apt-get to see what it can do)
+Rem Linux does not auto update so you'll have to do it on your own for safety reasons.
 
 -> Check the software udate list: sudo apt-get update (does not do anything on the system just check the update)
 -> To uograde the list: sudo apt-get upgrade (will ask you y/n, when having you roductive server you should test the upgrade on a test environment)
 
+-> Working with the packages:
+apt-get is the interface function to a lot of package related functions (man apt-get to see what it can do)
+
+e.g. sudo apt-get autoremove
+
 installation of finger
 finger user to retrieve info about a user.
+sudo apt-get install finger
 
-Important, most distributon have a "readle" list of its packages. in Ubuntu it's packages.ubuntu.com
+Important, most distributon have a "readble" list of its packages. 
+
+For Ubuntu it's packages.ubuntu.com
 
 Rem packages for Apache http server : Apache2 ; postgre sql postgresq ; mem cach: memcached
 
-Get info about your user: cat /etc/passwd
+Finger gets info about your user: cat /etc/passwd
 
-In linux system, root has always 0 as UID and as GUID
+In linux system, root has always 0 as UID and as GUID, its home directory is /root
 
 Rem current machine generic IP is  127.0.0.1
 
@@ -81,6 +100,8 @@ B/ Public key authentification
 -> User authentication with pwd is not very secure, hackers will try to break it, overloading the server with wrong pwd or breaking it.
 
 To manage connection one use the publc key encription
+
+Key generation command ssh-keygen
 
 Public Key encription (https://medium.com/@vrypan/explaining-public-key-cryptography-to-non-geeks-f0994b3c2d5)
 
@@ -144,3 +165,35 @@ FTP: 21
 SMTP: 25
 
 ufw is the ubuntu firewall, sudo ufw status to check its status
+
+sudo ufw status: to show the firewall status 
+
+-> Configuration command
+sudo ufw default deny incoming (to prevent all entries, do not activate the FW now or the VM is dead. it cannot receive info).
+sudo ufw default allow outgoing
+
+-> To allow ssh , & since vagrant set the ssh on port 2222 we can add tcp connection on this port
+sudo ufw allow ssh
+sudo ufw allow 2222/tcp
+
+-> For an http server
+sudo ufw allow www
+
+-> Enabling the fw
+sudo ufw enable
+
+This is important to cinfigure the FW pretty early in the process since if its wrongly set up the server can be useless.
+
+Link to configure server (webapp, chat, mail,)
+
+https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-14-04
+https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-14-04
+https://www.digitalocean.com/community/tutorials/how-to-run-your-own-mail-server-and-file-storage-with-peps-on-ubuntu-14-04
+https://www.digitalocean.com/community/tutorials/how-to-run-your-own-mail-server-with-mail-in-a-box-on-ubuntu-14-04
+https://www.digitalocean.com/community/tutorials/how-to-install-the-lita-chat-bot-for-irc-on-ubuntu-14-04
+
+BD instllation on a different server:
+
+Most web applications require persistent data storage, typically using a database server. You will now install PostgreSQL to server your data using the command sudo apt-get install postgresql.
+
+Since you are installing your web server and database server on the same machine, you do not need to modify your firewall settings. Your web server will communicate with the database via an internal mechanism that does not cross the boundaries of the firewall. If you were installing your database on a separate machine, you would need to modify the firewall settings on both the web server and the database server to permit these requests.

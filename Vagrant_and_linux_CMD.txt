@@ -1,4 +1,4 @@
-Vagrant Commands
+agrant Commands
 
 We’re now ready to get started working within our Linux virtual machine. If your download hasn’t completed from the initial setup, go ahead and take a break and come back when that has completed. You won’t be able to make further progress until the virtual machine is up and running as much of the course will take place within this environment.
 
@@ -23,3 +23,19 @@ Here are a few other important commands that we’ll discuss but you do not need
 
     vagrant destroy
     This command destroys your virtual machine. Your work is not saved, the machine is turned off and forgotten about for the most part. Think of this as formatting the hard drive of a computer. You can always use vagrant up to relaunch the machine but you’ll be left with the baseline Linux installation from the beginning of this course. You should not have to use this command at any time during this course unless, at some point in time, you perform a task on the virtual machine that makes it completely inoperable.
+
+Linux:
+
+Securized transfer:
+
+    Copy to the server (to the VM is my case), in this case student the user must have writting rights on the folder /var/www/html
+    scp -P 2222 -i ~/.ssh/id_rsa_uda ~/index.html student@127.0.0.1:/var/www/html
+    scp -P 2222 -i ~/.ssh/id_rsa_uda ~/index.html student@127.0.0.1:/var/www/html
+
+
+    Copy from the server (from the VM is my case)
+    scp -P 2222 -i ~/.ssh/id_rsa_uda student@127.0.0.1:/var/www/html/index.html ~/
+
+Change owner rights:
+               owner:group -R recursive 
+    sudo chown toto:foo -R /var/www/html
